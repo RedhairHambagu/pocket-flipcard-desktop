@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "口袋翻牌工具",
+  "version": "0.1.0",
+  "identifier": "cn.pocket.flipcard.desktop",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:5173",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "口袋翻牌工具",
+        "width": 1280,
+        "height": 820,
+        "minWidth": 960,
+        "minHeight": 640,
+        "resizable": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; connect-src 'self' https://pocketapi.48.cn https://source.48.cn https://mp4.48.cn; img-src 'self' asset: https://source.48.cn data: blob:; media-src 'self' asset: https://mp4.48.cn blob:; style-src 'self' 'unsafe-inline'; script-src 'self';",
+      "assetProtocol": {
+        "enable": true,
+        "scope": ["$APPLOCALDATA/media/**/*"]
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "Utility",
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "installerHooks": "./windows/installer-hooks.nsh"
+      }
+    }
+  }
+}
