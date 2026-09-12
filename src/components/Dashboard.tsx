@@ -375,7 +375,7 @@ const loadData = useCallback(async (pageNum: number = 1, reset: boolean = false)
     setErasingAllData(true);
     try {
       await eraseAllLocalApplicationData();
-      alert('所有本机数据已清除。应用将退出；随后可将应用移到废纸篓或通过 Windows 卸载程序卸载。');
+      alert('应用内的账号数据、登录信息、设置和媒体缓存已清除，已导出的文件仍保留。应用将退出；随后可删除 Windows EXE，或将 macOS 应用移到废纸篓。');
       await quitDesktopApp();
       // 浏览器预览时没有原生退出命令，刷新后应回到无登录、无数据的初始状态。
       window.location.reload();

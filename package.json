@@ -9,7 +9,7 @@
     "tauri": "tauri",
     "desktop:dev": "tauri dev",
     "desktop:build": "tauri build",
-    "desktop:build:windows": "tauri build --bundles nsis",
+    "desktop:build:windows": "tauri build --no-bundle",
     "lint": "eslint ."
   },
   "dependencies": {

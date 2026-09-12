@@ -3,5 +3,7 @@ dist/
 src-tauri/target/
 src-tauri/gen/schemas/
 .cargo/
+!src-tauri/.cargo/
+!src-tauri/.cargo/config.toml
 *.tsbuildinfo
 .DS_Store

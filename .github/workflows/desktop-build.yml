@@ -1,4 +1,4 @@
-name: Build desktop installers
+name: Build desktop apps
 
 on:
   workflow_dispatch:
@@ -34,7 +34,7 @@ jobs:
             runner: windows-latest
             target: x86_64-pc-windows-msvc
             build_command: npm run desktop:build:windows
-            artifact_path: src-tauri/target/release/bundle/nsis/*-setup.exe
+            artifact_path: src-tauri/target/release/*-windows-x64-portable.exe
 
     runs-on: ${{ matrix.runner }}
 
@@ -61,10 +61,17 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci
 
-      - name: Build installer
+      - name: Build desktop app
         run: ${{ matrix.build_command }}
 
-      - name: Upload installer artifact
+      - name: Prepare Windows portable executable
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $version = (Get-Content src-tauri/tauri.conf.json -Raw | ConvertFrom-Json).version
+          Copy-Item src-tauri/target/release/pocket-flipcard-desktop.exe "src-tauri/target/release/pocket-flipcard-desktop_${version}-windows-x64-portable.exe"
+
+      - name: Upload desktop artifact
         uses: actions/upload-artifact@v4
         with:
           name: desktop-${{ matrix.name }}
@@ -79,7 +86,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download installers
+      - name: Download desktop artifacts
         uses: actions/download-artifact@v4
         with:
           pattern: desktop-*

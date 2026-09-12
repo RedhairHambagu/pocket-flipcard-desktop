@@ -32,12 +32,6 @@
   "bundle": {
     "active": true,
     "targets": "all",
-    "category": "Utility",
-    "windows": {
-      "nsis": {
-        "installMode": "currentUser",
-        "installerHooks": "./windows/installer-hooks.nsh"
-      }
-    }
+    "category": "Utility"
   }
 }
